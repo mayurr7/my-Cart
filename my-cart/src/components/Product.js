@@ -1,20 +1,21 @@
 import React from "react";
 
 export default function Product(props) {
- 
-
-
+  
   return (
     <div>
       <div className="row">
-        <div className="col-5">
+        <div className="col-4">
           <h2>
             {props.product.name}
-            <span class="badge text-bg-secondary">${props.product.price}</span>
+            <span className="badge text-bg-secondary">${props.product.price}</span>
           </h2>
         </div>
-        <div className="col-3">
-            <button type="button" class="btn btn-primary">
+        <div className="col-2">
+            <button type="button" class="btn btn-primary" onClick={
+              ()=>{
+                  props.decrementQuantity(props.index);
+            }}>
              -
             </button>
             <button type="button" class="btn btn-secondary">
@@ -27,13 +28,12 @@ export default function Product(props) {
             >
              +
             </button>
-           
-            
-        </div>
-        </div>
-        <div className="col-4 ">
-         {props.product.quantity * props.product.price}
-      
+           </div>
+          </div>
+        <div className="col-3 ">
+        <button type="button" class="btn btn-secondary ">
+        ${props.product.quantity * props.product.price}
+      </button>
       </div>
      
     </div>

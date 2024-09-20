@@ -1,12 +1,12 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import ProductList from './components/ProductList';
-import Footer from './components/Footer';
-import Product from './components/Product';
+// import Footer from './components/Footer';
+// import Product from './components/Product';
 import React,{ useState } from 'react';
 
 function App() {
- let product = [
+ const products = [
   {
       name : "Tv",
       price : 8999,
@@ -20,10 +20,19 @@ function App() {
 ]
 
 
-let [productList, setProductList] = useState(product);
+
+let [productList, setProductList] = useState(products);
 let incrementQuantity = (index) =>{
   let newProductList = [...productList];
   newProductList[index].quantity++;
+  setProductList(newProductList);
+}
+
+let decrementQuantity = (index) => {
+  let newProductList = [...productList];
+  if(newProductList[index].quantity > 0){
+    newProductList[index].quantity--;
+  }
   setProductList(newProductList);
 }
 
@@ -31,12 +40,13 @@ let incrementQuantity = (index) =>{
     <>
        <Navbar />
        <main className='container mt-5 mx-5'>
-       <ProductList product = {product} incrementQuantity = {incrementQuantity}/>
+       <ProductList productList = {productList} incrementQuantity = {incrementQuantity} decrementQuantity ={decrementQuantity}/>
        </main>
-      <Footer />
+      {/* <Footer /> */}
       
     </>
   );
 }
+
 
 export default App;
