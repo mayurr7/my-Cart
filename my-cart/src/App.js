@@ -4,25 +4,26 @@ import ProductList from './components/ProductList';
 import Footer from './components/Footer';
 import Product from './components/Product';
 import React,{ useState } from 'react';
+import AddIten from './components/AddIten';
 
 function App() {
  const products = [
   {
-      name : "Tv",
-      price : 8999,
-      quantity : 0
-  },
-  {
-    name : "Mobile",
-    price : 899,
+    name : "Tv",
+    price : 8999,
     quantity : 0
-  }
+},
+{
+  name : "Mobile",
+  price : 899,
+  quantity : 0
+}
 ]
 
 
 
 let [productList, setProductList] = useState(products);
-let [totalAmount, setTotalAmount] = useState(0);
+let [totalAmount, setTotalAmount] = useState();
 
 let incrementQuantity = (index) =>{
   let newProductList = [...productList];
@@ -60,13 +61,26 @@ let decrementQuantity = (index) => {
     newProductList.splice(index, 1);
     setProductList(newProductList);
     setTotalAmount(newTotalAmounnt);
+    
+   };
 
-  };
+   let addItem = (name, price)=>{
+    let newProductList = [...productList];
+    newProductList.push(
+      {
+        price : price,
+        name : name,
+        quantity:0
+      }
+    );
+    setProductList(newProductList);
+  }
 
   return (
     <>
        <Navbar />
        <main className='container mt-5 mx-5'>
+        <AddIten addItem= {addItem} />
        <ProductList productList = {productList} incrementQuantity = {incrementQuantity} decrementQuantity ={decrementQuantity} removeItem ={removeItem}/>
        </main>
       <Footer totalAmount ={totalAmount} resetQuantity ={resetQuantity} />
